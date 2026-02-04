@@ -7,7 +7,7 @@
 
 set -e
 
-REPO_URL="https://raw.githubusercontent.com/anthropics/claude-code-notifier/main"
+REPO_URL="https://raw.githubusercontent.com/peanut996/claude-code-notifier/master"
 CLAUDE_DIR="$HOME/.claude"
 SETTINGS_FILE="$CLAUDE_DIR/settings.json"
 NOTIFIER_SCRIPT="claude-code-notifier.sh"
@@ -26,7 +26,7 @@ echo "===================================="
 echo ""
 
 #==============================================================================
-# Check dependencies
+# Check and install dependencies
 #==============================================================================
 check_dependencies() {
   local missing=()
@@ -53,14 +53,20 @@ check_dependencies() {
     echo ""
     case "$(uname -s)" in
       Darwin*)
-        echo "Install with: brew install ${missing[*]}"
+        if command -v brew >/dev/null 2>&1; then
+          echo "Installing dependencies via Homebrew..."
+          brew install ${missing[*]}
+        else
+          echo "Homebrew not found. Install with: brew install ${missing[*]}"
+          echo "Continuing installation anyway..."
+        fi
         ;;
       Linux*)
         echo "Install with: sudo apt install ${missing[*]}"
+        echo "Continuing installation anyway..."
         ;;
     esac
     echo ""
-    echo "Continuing installation anyway..."
   else
     echo "All dependencies found."
   fi
