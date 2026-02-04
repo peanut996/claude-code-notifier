@@ -14,6 +14,14 @@ Get notified when Claude Code starts a session, finishes responding, encounters 
 
 ## Installation
 
+### Quick Install (One-liner)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/peanut996/claude-code-notifier/master/install.sh | bash
+```
+
+### Clone & Install
+
 ```bash
 git clone https://github.com/peanut996/claude-code-notifier.git
 cd claude-code-notifier
